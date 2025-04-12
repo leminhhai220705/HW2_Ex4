@@ -5,197 +5,167 @@ const bar3 = document.querySelector("#bar-3");
 const bar4 = document.querySelector("#bar-4");
 
 function activeProfessionalAnimation() {
-    if (html.scrollTop >= 776) {
-        bar1.classList.add("animate-bar1");
-        bar2.classList.add("animate-bar2");
-        bar3.classList.add("animate-bar3");
-        bar4.classList.add("animate-bar4");
-    }
+  if (html.scrollTop >= 692) {
+    bar1.classList.add("animate-bar1");
+    bar2.classList.add("animate-bar2");
+    bar3.classList.add("animate-bar3");
+    bar4.classList.add("animate-bar4");
+  }
 }
 
-window.addEventListener("scroll", activeProfessionalAnimation)
-
+window.addEventListener("scroll", activeProfessionalAnimation);
 
 function MethodScrolling(id = {}) {
+  const { buttonId, pageId } = id;
 
-    const { buttonId, pageId } = id;
+  this.scrollToTop = () => {
+    this.topScrollingButton = document.querySelector(`#${buttonId}`);
 
-    this.scrollToTop = () => {
-        this.topScrollingButton = document.querySelector(`#${buttonId}`);
+    this.topScrollingButton.onclick = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    };
 
-        this.topScrollingButton.onclick = () => {
-            window.scrollTo(
-                {
-                    top: 0,
-                    behavior: "smooth",
-                }
-            )
-        }
+    if (!this.topScrollingButton) {
+      console.error(`${buttonId} does not exist`);
+      return;
+    }
+    this.addIndicate = () => {
+      if (html.scrollTop > 155) {
+        this.topScrollingButton.classList.add("indicate");
+      }
+    };
+    this.removeIndicate = () => {
+      if (html.scrollTop <= 155) {
+        this.topScrollingButton.classList.remove("indicate");
+      }
+    };
 
-        if (!this.topScrollingButton) {
-            console.error(`${buttonId} does not exist`);
-            return;
-        }
-        this.addIndicate = () => {
-            if (html.scrollTop > 155) {
-                this.topScrollingButton.classList.add("indicate");
-            }
-        }
-        this.removeIndicate = () => {
-            if (html.scrollTop <= 155) {
-                this.topScrollingButton.classList.remove("indicate");
-            }
-        }
+    window.addEventListener("scroll", this.addIndicate);
+    window.addEventListener("scroll", this.removeIndicate);
+  };
 
-        window.addEventListener("scroll", this.addIndicate)
-        window.addEventListener("scroll", this.removeIndicate)
+  this.scrollToHome = () => {
+    this.homeScrollingButton = document.querySelector(`#${buttonId}`);
+    this.homePage = document.querySelector(`#${pageId}`);
+    if (!(this.homePage && this.homeScrollingButton)) {
+      console.error(`${buttonId} or ${pageId} does not exist`);
+      return;
     }
 
-    this.scrollToHome = () => {
-        this.homeScrollingButton = document.querySelector(`#${buttonId}`);
-        this.homePage = document.querySelector(`#${pageId}`);
-        if (!(this.homePage && this.homeScrollingButton)) {
-            console.error(`${buttonId} or ${pageId} does not exist`);
-            return;
-        }
+    this.homeScrollingButton.onclick = () => {
+      this.homePage.scrollIntoView({
+        block: "start",
+        behavior: "smooth",
+      });
+    };
+  };
 
-        this.homeScrollingButton.onclick = () => {
-            this.homePage.scrollIntoView({
-                block: "start",
-                behavior: "smooth",
-            })
-        }
+  this.scrollToProfessional = () => {
+    this.professionalScrollingButton = document.querySelector(`#${buttonId}`);
+    this.professionalPage = document.querySelector(`#${pageId}`);
+    if (!(this.professionalScrollingButton && this.professionalPage)) {
+      console.error(`${buttonId} or ${pageId} does not exist`);
+      return;
     }
 
-    this.scrollToProfessional = () => {
-        this.professionalScrollingButton = document.querySelector(`#${buttonId}`);
-        this.professionalPage = document.querySelector(`#${pageId}`);
-        if (!(this.professionalScrollingButton && this.professionalPage)) {
-            console.error(`${buttonId} or ${pageId} does not exist`);
-            return;
-        }
+    console.log(this.professionalPage.offsetTop);
+    this.professionalScrollingButton.onclick = () => {
+      this.professionalPage.scrollIntoView({
+        block: "end",
+        behavior: "smooth",
+      });
+    };
+  };
 
-        console.log(this.professionalPage.offsetTop);
-        this.professionalScrollingButton.onclick = () => {
-            this.professionalPage.scrollIntoView(
-                {
-                    block: "end",
-                    behavior: "smooth",
-                }
-            )
+  this.scrollToPortfolio = () => {
+    this.portfolioScrollingButton = document.querySelector(`#${buttonId}`);
+    this.portfolioPage = document.querySelector(`#${pageId}`);
 
-        }
+    if (!(this.portfolioPage && this.portfolioScrollingButton)) {
+      console.error(`${buttonId} or ${pageId} does not exist`);
+      return;
     }
 
-    this.scrollToPortfolio = () => {
-        this.portfolioScrollingButton = document.querySelector(`#${buttonId}`);
-        this.portfolioPage = document.querySelector(`#${pageId}`);
+    this.portfolioScrollingButton.onclick = () => {
+      this.portfolioPage.scrollIntoView({
+        block: "center",
+        behavior: "smooth",
+      });
+    };
+  };
 
-        if (!(this.portfolioPage && this.portfolioScrollingButton)) {
-            console.error(`${buttonId} or ${pageId} does not exist`);
-            return;
-        }
+  this.scrollToExperience = () => {
+    this.experienceScrollingButton = document.querySelector(`#${buttonId}`);
+    this.experiencePage = document.querySelector(`#${pageId}`);
 
-        this.portfolioScrollingButton.onclick = () => {
-            this.portfolioPage.scrollIntoView(
-                {
-                    block: "center",
-                    behavior: "smooth",
-                }
-            )
-        }
+    if (!(this.experiencePage && this.experienceScrollingButton)) {
+      console.error(`${buttonId} or ${pageId} does not exist`);
+      return;
     }
 
-    this.scrollToExperience = () => {
-        this.experienceScrollingButton = document.querySelector(`#${buttonId}`);
-        this.experiencePage = document.querySelector(`#${pageId}`);
+    this.experienceScrollingButton.onclick = () => {
+      this.experiencePage.scrollIntoView({
+        block: "start",
+        behavior: "smooth",
+      });
+    };
+  };
 
-        if (!(this.experiencePage && this.experienceScrollingButton)) {
-            console.error(`${buttonId} or ${pageId} does not exist`);
-            return;
-        }
+  this.scrollToContact = () => {
+    this.contactScrollingButton = document.querySelector(`#${buttonId}`);
+    this.contactPage = document.querySelector(`#${pageId}`);
 
-        this.experienceScrollingButton.onclick = () => {
-            this.experiencePage.scrollIntoView(
-                {
-                    block: "start",
-                    behavior: "smooth"
-                }
-            )
-        }
+    if (!(this.contactPage && this.contactScrollingButton)) {
+      console.error(`${buttonId} or ${pageId} does not exist`);
+      return;
     }
 
-    this.scrollToContact = () => {
-        this.contactScrollingButton = document.querySelector(`#${buttonId}`);
-        this.contactPage = document.querySelector(`#${pageId}`);
-
-        if (!(this.contactPage && this.contactScrollingButton)) {
-            console.error(`${buttonId} or ${pageId} does not exist`);
-            return;
-        }
-
-        this.contactScrollingButton.onclick = () => {
-            this.contactPage.scrollIntoView(
-                {
-                    block: "center",
-                    behavior: "smooth",
-                }
-            )
-        }
-    }
+    this.contactScrollingButton.onclick = () => {
+      this.contactPage.scrollIntoView({
+        block: "center",
+        behavior: "smooth",
+      });
+    };
+  };
 }
 
-const topScrollAction = new MethodScrolling(
-    {
-        buttonId: "head-scroll",
-    }
-);
+const topScrollAction = new MethodScrolling({
+  buttonId: "head-scroll",
+});
 topScrollAction.scrollToTop();
 
-
-const homeScrollAction = new MethodScrolling(
-    {
-        buttonId: "home-button",
-        pageId: "home-page",
-    }
-)
+const homeScrollAction = new MethodScrolling({
+  buttonId: "home-button",
+  pageId: "home-page",
+});
 homeScrollAction.scrollToHome();
 
-
-const professionalScrollAction = new MethodScrolling(
-    {
-        buttonId: "professional-button",
-        pageId: "professional-page"
-    }
-)
+const professionalScrollAction = new MethodScrolling({
+  buttonId: "professional-button",
+  pageId: "professional-page",
+});
 professionalScrollAction.scrollToProfessional();
 
-
-const portfolioScrollAction = new MethodScrolling(
-    {
-        buttonId: "portfolio-button",
-        pageId: "portfolio-page"
-    }
-)
+const portfolioScrollAction = new MethodScrolling({
+  buttonId: "portfolio-button",
+  pageId: "portfolio-page",
+});
 
 portfolioScrollAction.scrollToPortfolio();
 
-
-const experienceScrollAction = new MethodScrolling(
-    {
-        buttonId: "experience-button",
-        pageId: "experience-page",
-    }
-)
+const experienceScrollAction = new MethodScrolling({
+  buttonId: "experience-button",
+  pageId: "experience-page",
+});
 
 experienceScrollAction.scrollToExperience();
 
-
-const contactScrollAction = new MethodScrolling(
-    {
-        buttonId: 'contact-button',
-        pageId: 'contact-page',
-    }
-)
+const contactScrollAction = new MethodScrolling({
+  buttonId: "contact-button",
+  pageId: "contact-page",
+});
 
 contactScrollAction.scrollToContact();
