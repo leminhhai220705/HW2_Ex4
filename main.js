@@ -5,7 +5,7 @@ const bar3 = document.querySelector("#bar-3");
 const bar4 = document.querySelector("#bar-4");
 
 function activeProfessionalAnimation() {
-  if (html.scrollTop >= 800) {
+  if (html.scrollTop >= 1210) {
     bar1.classList.add("animate-bar1");
     bar2.classList.add("animate-bar2");
     bar3.classList.add("animate-bar3");
